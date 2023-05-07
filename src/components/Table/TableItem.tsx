@@ -14,7 +14,6 @@ export const TableItem = (props: Props) => {
       <td>
         <Image src={props.data.picture.thumbnail} roundedCircle />
       </td>
-      <td>{props.data.gender}</td>
       <td>{props.data.email}</td>
       <td>{/* <CustomModal setSelected={setSelected} /> */}</td>
     </tr>
