@@ -6,13 +6,19 @@ import { CustomTable } from "./components/Table/Table";
 
 const App = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const [tableData, setTableData] = useState([]);
+  const [tableData, setTableData] = useState<Row[]>([]);
   const [page, setPage] = useState(1);
   const LIMIT = 5;
 
-  const handleEdit = useCallback((data: Row) => {
-    console.log(data);
-  }, []);
+  const handleEdit = useCallback(
+    (data: Row) => {
+      const newData = tableData?.map((row: Row) =>
+        data.login.uuid === row.login.uuid ? data : row
+      );
+      setTableData(newData);
+    },
+    [tableData]
+  );
 
   // Load the table data
   const loadMore = () => {
@@ -20,15 +26,15 @@ const App = () => {
   };
 
   useEffect(() => {
+    // Fetch data from the API
     const fetchData = async () => {
       setIsLoading(true);
       const {
         data: { results },
       } = await axios.get(
-        // `https://jsonplaceholder.typicode.com/comments?page=${page}&_limit=${LIMIT}}`
         `https://randomuser.me/api/?seed=dexi-interview&results=${LIMIT}&page=${page}`
       );
-      setTableData((prev) => prev.concat(results));
+      setTableData((prev) => [...prev, ...results]);
       setIsLoading(false);
     };
     fetchData();

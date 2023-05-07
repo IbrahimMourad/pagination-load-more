@@ -1,7 +1,12 @@
 import { Image } from "react-bootstrap";
 import { Row } from "../../types/RowItem.types";
 
-type Props = { id?: string; handleEdit: (data: Row) => void; data: Row };
+type Props = {
+  id?: string;
+  data: Row;
+  setSelected: (data: Row) => void;
+  handleShow: () => void;
+};
 
 export const TableItem = (props: Props) => {
   return (
@@ -11,14 +16,7 @@ export const TableItem = (props: Props) => {
       </td>
       <td>{props.data.gender}</td>
       <td>{props.data.email}</td>
-      <td>
-        <button
-          className="btn btn-secondary  m-a"
-          onClick={() => props.handleEdit(props.data)}
-        >
-          edit
-        </button>
-      </td>
+      <td>{/* <CustomModal setSelected={setSelected} /> */}</td>
     </tr>
   );
 };

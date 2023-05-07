@@ -1,12 +1,11 @@
 export interface Row {
-    name?: string;
+    name?: {
+        first?: string
+        last?: string
+    };
     email?: string;
-    itemId?: string
-    gender?: string
     login: { uuid: string }
     picture: {
-        large: string
-        medium: string
         thumbnail: string
     }
 }
